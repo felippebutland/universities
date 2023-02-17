@@ -1,20 +1,14 @@
 interface PaginationResult<T> {
-    results: T[];
     page: number;
     limit: number;
     totalCount: number;
 }
 
-function paginate<T>(array: T, page: number, limit: number): PaginationResult<T> {
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-
-    const results = array.slice(startIndex, endIndex);
+function paginate<T>(array: T[], page: number, limit: number): PaginationResult<T> {
 
     return {
-        results,
-        page,
-        limit,
+        page: page * limit,
+        limit: (page - 1) * limit,
         totalCount: array.length,
     };
 }

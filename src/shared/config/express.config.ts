@@ -4,10 +4,11 @@ import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import { json, urlencoded } from "body-parser";
-import { connect } from "mongoose";
+import dotenv from "dotenv";
 import universityRoutes from "../../../src/modules/universities/controllers/university.controller";
-import userRoutes from "../../../src/modules/users/controllers/user.controller";
+// import userRoutes from "../../../src/modules/users/controllers/user.controller";
 
+dotenv.config();
 const app: Application = express();
 
 app.use(cors());
@@ -16,12 +17,12 @@ app.use(compression());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-if (config.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
 app.use("/universities", universityRoutes);
-app.use("/users", userRoutes);
+// app.use("/users", userRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     const error: any = new Error("Not found");
