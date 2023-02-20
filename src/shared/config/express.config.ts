@@ -6,7 +6,8 @@ import compression from "compression";
 import { json, urlencoded } from "body-parser";
 import dotenv from "dotenv";
 import universityRoutes from "../../../src/modules/universities/controllers/university.controller";
-// import userRoutes from "../../../src/modules/users/controllers/user.controller";
+import userRoutes from "../../../src/modules/users/controllers/user.controller";
+import {errorHandler} from "../middleware/error.middleware";
 
 dotenv.config();
 const app: Application = express();
@@ -22,7 +23,9 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use("/universities", universityRoutes);
-// app.use("/users", userRoutes);
+app.use("/users", userRoutes);
+
+app.use(errorHandler)
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     const error: any = new Error("Not found");
