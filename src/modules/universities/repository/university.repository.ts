@@ -15,10 +15,15 @@ class UniversityRepository {
         await this.collection.insertOne(university);
     }
 
+    // async insertMany(universities: UniversityDTO): Promise<void> {
+    //     console.log(universities)
+    //     await this.collection.insertMany(universities);
+    // }
+
     async findAll(
-        country: string | undefined,
-        page: number,
-        limit: number
+        country?: string,
+        page?: number,
+        limit?: number,
     ): Promise<{
         pagination: PaginationResult<{
             country: string;
@@ -39,6 +44,10 @@ class UniversityRepository {
             alphaTwoCode: any;
         }[];
     }> {
+        if(!page || !limit) {
+            page = 1;
+            limit = 100;
+        }
         const filter: any = {};
         if (country) {
             filter.country = country;
@@ -46,7 +55,7 @@ class UniversityRepository {
 
         const documents = await this.collection
             .find(filter)
-            .skip((page - 1) * limit)
+            .skip(page)
             .limit(limit)
             .toArray();
 
@@ -60,7 +69,7 @@ class UniversityRepository {
             alphaTwoCode: document.alpha_two_codes,
         }));
 
-        const pagination = paginate(results, page, limit);
+        const pagination = paginate(results, page, limit );
 
         return {
             results,
@@ -81,6 +90,10 @@ class UniversityRepository {
 
     async delete(id: ObjectId): Promise<void> {
         await this.collection.deleteOne({ _id: id });
+    }
+
+    async deleteAll(): Promise<void> {
+        await this.collection.deleteMany({});
     }
 
     async findByCountryStateAndName(country?: string, stateProvince?: string, name?: string): Promise<UniversityDTO | null> {

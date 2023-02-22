@@ -6,8 +6,8 @@ interface PaginationResult<T> {
 
 function paginate<T>(array: T[], page: number, limit: number): PaginationResult<T> {
     return {
-        page: page * limit,
-        limit: (page - 1) * limit,
+        page: page,
+        limit: page * limit,
         totalCount: array.length,
     };
 }

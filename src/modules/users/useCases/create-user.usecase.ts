@@ -20,6 +20,7 @@ class CreateUserUseCase {
         const { username, password, email, name } = params;
 
         const user = await this.userRepository.getByUsername(username);
+
         if (user) {
             throw new Error("Username already in use");
         }

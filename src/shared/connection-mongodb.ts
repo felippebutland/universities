@@ -12,11 +12,7 @@ import { DeleteUserUseCase } from "../modules/users/useCases/delete-user.usecase
 import { AuthenticationUseCase } from "../modules/users/useCases/authentication.usecase";
 import {User} from "../modules/users/domain/user.entity";
 import {UserRepository} from "../modules/users/repositories/user.repository";
-
-const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-};
+import {externalConnectionUsecase} from "../modules/external/useCases/external-connection.usecase";
 
 const url = 'mongodb://root:example@localhost:27017/?authSource=admin';
 
@@ -49,6 +45,8 @@ async function createRepository() {
     const updateUniversityUseCase = new UpdateUniversityUseCase(universityRepository);
     const deleteUniversityUseCase = new DeleteUniversityUseCase(universityRepository);
 
+    const externalConnection = new externalConnectionUsecase(universityRepository);
+
     return {
         createUniversityUseCase,
         getUniversitiesUseCase,
@@ -58,7 +56,8 @@ async function createRepository() {
         deleteUserUseCase,
         updateUserUseCase,
         getUserByIdUseCase,
-        createUserUseCase
+        createUserUseCase,
+        externalConnection
     };
 }
 

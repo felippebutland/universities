@@ -20,7 +20,7 @@ createRepository().then(async () => {
 
     new UniversityRepository(universityCollection);
 
-    router.get("/", authMiddleware, async (req: Request<{}, {}, {}, { country?: string; page?: string; limit?: string }>, res: Response) => {
+    router.get("/", async (req: Request<{}, {}, {}, { country?: string; page?: string; limit?: string }>, res: Response) => {
         const {country, page, limit} = req.query;
         const universities = await getUniversitiesUseCase.execute({
             country,

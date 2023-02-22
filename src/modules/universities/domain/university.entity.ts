@@ -8,6 +8,7 @@ export interface UniversityDTO {
     name: string;
     state_province: string;
     web_pages: string[];
+    updated_at: Date;
 }
 
 export interface UpdateUniversityDTO {
