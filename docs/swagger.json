@@ -191,6 +191,117 @@
             }
             }
         }
+    },
+    "/universities/": {
+        "get": {
+            "summary": "Get universities",
+            "description": "Get universities",
+            "operationId": "getUniversities",
+            "produces": [
+            "application/json"
+            ],
+            "responses": {
+            "200": {
+                "description": "OK"
+            },
+            "400": {
+                "description": "Bad Request"
+            },
+            "401": {
+                "description": "Unauthorized"
+            },
+            "403": {
+                "description": "Forbidden"
+            },
+            "404": {
+                "description": "Not Found"
+            },
+            "500": {
+                "description": "Internal Server Error"
+            }
+            }
+        }
+    },
+    "/universities/:id": {
+        "post": {
+        "summary": "Post university",
+        "description": "Inserir university",
+        "operationId": "postUniversity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "University id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "description": "University name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alpha_two_code",
+            "in": "body",
+            "description": "University alpha_two_code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state_province",
+            "in": "body",
+            "description": "University state_province",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domains",
+            "in": "body",
+            "description": "University domains",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "web_pages",
+            "in": "body",
+            "description": "University web_pages",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "in": "body",
+            "description": "University country",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   }
 }

@@ -3,8 +3,6 @@ import { UniversityDTO } from '../modules/universities/domain/university.entity'
 import { UniversityRepository } from '../modules/universities/repository/university.repository';
 import { CreateUniversityUseCase } from "../modules/universities/useCases/create-university.usecase";
 import { GetUniversitiesUseCase } from "../modules/universities/useCases/get-universities.usecase";
-import { UpdateUniversityUseCase } from "../modules/universities/useCases/update-university.usecase";
-import { DeleteUniversityUseCase } from "../modules/universities/useCases/delete-university.usecase";
 import { CreateUserUseCase } from "../modules/users/useCases/create-user.usecase";
 import { GetUserByIdUseCase } from "../modules/users/useCases/get-user-by-id.usecase";
 import { DeleteUserUseCase } from "../modules/users/useCases/delete-user.usecase";
@@ -40,16 +38,12 @@ async function createRepository() {
 
     const createUniversityUseCase = new CreateUniversityUseCase(universityRepository);
     const getUniversitiesUseCase = new GetUniversitiesUseCase(universityRepository);
-    const updateUniversityUseCase = new UpdateUniversityUseCase(universityRepository);
-    const deleteUniversityUseCase = new DeleteUniversityUseCase(universityRepository);
 
     const externalConnection = new externalConnectionUsecase(universityRepository);
 
     return {
         createUniversityUseCase,
         getUniversitiesUseCase,
-        updateUniversityUseCase,
-        deleteUniversityUseCase,
         authenticationUseCase,
         deleteUserUseCase,
         getUserByIdUseCase,

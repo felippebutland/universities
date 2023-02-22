@@ -1,6 +1,6 @@
 import express, {Request, Response} from "express";
 import { ObjectId} from "mongodb";
-import {UniversityDTO, UpdateUniversityDTO} from "../domain/university.entity";
+import {UniversityDTO} from "../domain/university.entity";
 import {createRepository, connect} from "../../../shared/connection-mongodb";
 import {UniversityRepository} from "../repository/university.repository";
 import { Collection } from "mongodb";
@@ -14,8 +14,6 @@ createRepository().then(async () => {
     const {
         createUniversityUseCase,
         getUniversitiesUseCase,
-        updateUniversityUseCase,
-        deleteUniversityUseCase,
     } = await createRepository();
 
     new UniversityRepository(universityCollection);
@@ -32,21 +30,6 @@ createRepository().then(async () => {
 
     router.post("/", authMiddleware, async (req: Request<{}, {}, UniversityDTO>, res: Response) => {
         const university = await createUniversityUseCase.execute(req.body);
-        res.json(university);
-    });
-
-    router.put("/:id", authMiddleware, async (req: Request<{ id: string }, {}, UpdateUniversityDTO>, res: Response) => {
-        const {id} = req.params;
-        const university = await updateUniversityUseCase.execute({
-            ...req.body,
-            _id: new ObjectId(id)
-        });
-        res.json(university);
-    });
-
-    router.delete("/:id", authMiddleware, async (req: Request<{ id: string }, {}, {}>, res: Response) => {
-        const {id} = req.params;
-        const university = await deleteUniversityUseCase.execute(new ObjectId(id));
         res.json(university);
     });
 });
