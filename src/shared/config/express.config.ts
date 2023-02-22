@@ -25,12 +25,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(timeout(600000));
-
+app.use(errorHandler)
 app.use("/universities", universityRoutes);
 app.use("/users", userRoutes);
 app.use("/external-connection", externalConnection);
 
-app.use(errorHandler)
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     res.status(err.status || 500);

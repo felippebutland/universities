@@ -3,7 +3,6 @@ import { UserRepository } from "../repositories/user.repository";
 import { User } from "../domain/user.entity";
 import { Collection, ObjectId } from "mongodb";
 import { connect, createRepository } from "../../../shared/connection-mongodb";
-import { UpdateUserParams } from "../useCases/update-user.usecase";
 
 const router = express.Router();
 
@@ -15,14 +14,14 @@ createRepository().then(async (useCases) => {
     const {
         createUserUseCase,
         getUserByIdUseCase,
-        updateUserUseCase,
         deleteUserUseCase,
         authenticationUseCase
     } = useCases;
 
-    router.post('/users', async (req: Request, res: Response) => {
+    router.post('/', async (req: Request, res: Response) => {
+        console.log("cheguei aqui")
         const { name, email, password, username } = req.body;
-        const user = await createUserUseCase.execute({name, email, password, username } as User);
+        const user = await createUserUseCase.execute({name, email, password, username });
         res.json(user);
     });
 
@@ -33,14 +32,6 @@ createRepository().then(async (useCases) => {
         if(!user) return res.status(204).json()
 
         res.json(user);
-    });
-
-    router.put('/users/:id', async (req: Request, res: Response) => {
-        const { id } = req.params;
-        const { name, email, password } = req.body;
-        await updateUserUseCase.execute({ id, name, email, password } as UpdateUserParams);
-
-        res.status(204).json();
     });
 
     router.delete('/users/:id', async (req: Request, res: Response) => {

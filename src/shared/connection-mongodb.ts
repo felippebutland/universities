@@ -7,7 +7,6 @@ import { UpdateUniversityUseCase } from "../modules/universities/useCases/update
 import { DeleteUniversityUseCase } from "../modules/universities/useCases/delete-university.usecase";
 import { CreateUserUseCase } from "../modules/users/useCases/create-user.usecase";
 import { GetUserByIdUseCase } from "../modules/users/useCases/get-user-by-id.usecase";
-import { UpdateUserUseCase } from "../modules/users/useCases/update-user.usecase";
 import { DeleteUserUseCase } from "../modules/users/useCases/delete-user.usecase";
 import { AuthenticationUseCase } from "../modules/users/useCases/authentication.usecase";
 import {User} from "../modules/users/domain/user.entity";
@@ -36,7 +35,6 @@ async function createRepository() {
 
     const createUserUseCase = new CreateUserUseCase(usersRepository);
     const getUserByIdUseCase = new GetUserByIdUseCase(usersRepository);
-    const updateUserUseCase = new UpdateUserUseCase(usersRepository);
     const deleteUserUseCase = new DeleteUserUseCase(usersRepository);
     const authenticationUseCase = new AuthenticationUseCase(usersRepository);
 
@@ -54,7 +52,6 @@ async function createRepository() {
         deleteUniversityUseCase,
         authenticationUseCase,
         deleteUserUseCase,
-        updateUserUseCase,
         getUserByIdUseCase,
         createUserUseCase,
         externalConnection

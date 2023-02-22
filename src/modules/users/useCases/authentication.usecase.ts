@@ -25,14 +25,13 @@ class AuthenticationUseCase {
         }
 
         const isValidPassword = await compare(password, user.password);
+
         if (!isValidPassword) {
             throw new DomainNotFoundError("Invalid credentials");
         }
 
         if(user && user._id && jwtsecret) {
-            return sign(user._id, jwtsecret.toString(), {
-                expiresIn: 86400
-            });
+            return sign(user._id.toString(), jwtsecret.toString());
         }
     }
 }
