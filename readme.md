@@ -1,9 +1,14 @@
 # Tecnologias utilizadas:
 
 -> Typescript
+
 -> Express
+
 -> MongoDB 
+
 -> Docker
+
+-> Cron
 
 
 # Instruções para rodar:
