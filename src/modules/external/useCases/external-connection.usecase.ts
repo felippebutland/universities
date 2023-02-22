@@ -22,6 +22,8 @@ export class externalConnectionUsecase {
                     university.updated_at = new Date()
                     this.universityRepository.create(university)
                 })
+            } else {
+                await this.execute()
             }
         }
 
